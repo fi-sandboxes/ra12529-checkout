@@ -1,0 +1,15 @@
+# G6: a release regression run with no failed test - the passing fixture of Gate 4 (story 12529).
+name: Release Regression Green
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ReleaseRegression
+          path: fixtures/junit-release-regression-green.xml
