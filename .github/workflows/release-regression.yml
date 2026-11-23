@@ -1,4 +1,4 @@
-# G3: the release regression run - the only run that uploads an artifact named exactly ReleaseRegression (story 12529).
+# G3: the release regression run - uploads an artifact named exactly ReleaseRegression; 2 of its 20 tests fail (story 12529).
 name: Release Regression
 on:
   workflow_dispatch:
