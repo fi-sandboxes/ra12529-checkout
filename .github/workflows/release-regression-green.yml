@@ -1,7 +1,13 @@
 # G6: a release regression run with no failed test - the passing fixture of Gate 4 (story 12529).
 name: Release Regression Green
+run-name: ${{ inputs.label || github.workflow }}
 on:
   workflow_dispatch:
+    inputs:
+      label:
+        description: Name of this run (the sandbox passes the run key, for example I2-COV); empty leaves the default
+        required: false
+        default: ""
 permissions:
   contents: read
 jobs:
