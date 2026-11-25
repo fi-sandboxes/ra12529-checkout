@@ -6,9 +6,14 @@
 name: SonarCloud
 # The optional input `version` becomes sonar.projectVersion: the analysis of a release carries the
 # release key, and SonarCloud keeps an analysis that opens a version when it thins the others out.
+run-name: ${{ inputs.label || github.workflow }}
 on:
   workflow_dispatch:
     inputs:
+      label:
+        description: Name of this run (the sandbox passes the run key, for example I2-COV); empty leaves the default
+        required: false
+        default: ""
       version:
         description: Project version of this analysis (a release key); empty leaves it unset
         required: false
