@@ -1,8 +1,14 @@
 # G1: a CI run that publishes unit-test JUnit and Cobertura coverage (story 12529).
 # The reports are committed fixtures, not live test output, so the counts are known in advance.
 name: CI
+run-name: ${{ inputs.label || github.workflow }}
 on:
   workflow_dispatch:
+    inputs:
+      label:
+        description: Name of this run (the sandbox passes the run key, for example I2-COV); empty leaves the default
+        required: false
+        default: ""
 permissions:
   contents: read
 jobs:
