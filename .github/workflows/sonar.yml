@@ -4,8 +4,15 @@
 # Manual trigger only: the fixture uploads are a dozen commits, and the analysis runs once,
 # after the SONAR_TOKEN secret exists.
 name: SonarCloud
+# The optional input `version` becomes sonar.projectVersion: the analysis of a release carries the
+# release key, and SonarCloud keeps an analysis that opens a version when it thins the others out.
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: Project version of this analysis (a release key); empty leaves it unset
+        required: false
+        default: ""
 permissions:
   contents: read
 jobs:
@@ -17,5 +24,7 @@ jobs:
           fetch-depth: 0
       # pinned to the commit of tag v5 (read 2026-11-16) - Sonar rule githubactions:S7637
       - uses: SonarSource/sonarqube-scan-action@2f77a1ec69fb1d595b06f35ab27e97605bdef703 # v5
+        with:
+          args: ${{ inputs.version && format('-Dsonar.projectVersion={0}', inputs.version) || '' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
