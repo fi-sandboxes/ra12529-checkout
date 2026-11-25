@@ -1,7 +1,13 @@
 # G4: a second coverage format - JaCoCo XML in an artifact whose name contains "coverage" (story 12529).
 name: Coverage JaCoCo
+run-name: ${{ inputs.label || github.workflow }}
 on:
   workflow_dispatch:
+    inputs:
+      label:
+        description: Name of this run (the sandbox passes the run key, for example I2-COV); empty leaves the default
+        required: false
+        default: ""
 permissions:
   contents: read
 jobs:
